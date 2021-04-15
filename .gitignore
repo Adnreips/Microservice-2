@@ -37,3 +37,4 @@ build/
 /.mvn/
 /microservices2/microservices2.iml
 /config/
+/backend/target/
