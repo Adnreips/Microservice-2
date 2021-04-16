@@ -4,7 +4,13 @@ package com.springboot.microservice.controller;
 import com.springboot.microservice.CurrencyConversionDto;
 import com.springboot.microservice.rest.service.RestTemplateService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
 
@@ -14,9 +20,9 @@ import java.util.Random;
 @Slf4j
 public class CurrencyConversionRestController {
 
+    private final RestTemplateService restTemplateService;
 
-    RestTemplateService restTemplateService;
-
+    @Autowired
     public CurrencyConversionRestController(RestTemplateService restTemplateService) {
         this.restTemplateService = restTemplateService;
     }
@@ -32,8 +38,7 @@ public class CurrencyConversionRestController {
 
     @GetMapping(value = "/restasync", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public CurrencyConversionDto convertAsyncCurrency(@RequestBody CurrencyConversionDto currencyConversionDto) {
-
+    public CurrencyConversionDto convertCurrencyAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
         currencyConversionDto.setId(new Random().nextLong());
 
         restTemplateService.beginAsyncCurrencyConversion(currencyConversionDto);
