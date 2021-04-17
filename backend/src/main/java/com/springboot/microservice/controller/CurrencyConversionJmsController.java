@@ -28,9 +28,7 @@ public class CurrencyConversionJmsController {
     @ResponseBody
     public CurrencyConversionDto sendToForexService(@RequestBody CurrencyConversionDto message) {
 
-
         sender.sendMessageObject(queueNameObject, message);
-
 
         return message;
     }

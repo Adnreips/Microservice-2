@@ -1,11 +1,9 @@
-package com.springboot.microservice.dto;
+package com.springboot.microservice.transfer;
 
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
-
 
 
 @Component
@@ -17,6 +15,9 @@ public class TestDto implements Serializable {
     private BigDecimal quantity;
     private BigDecimal multiply;
     private int port;
+
+    public TestDto() {
+    }
 
     public TestDto(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity, BigDecimal multiply, int port) {
         this.id = id;

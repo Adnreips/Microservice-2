@@ -16,6 +16,7 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+
     <dependencies>
 
         <dependency>
@@ -26,6 +27,11 @@
             <groupId>ma.glasnost.orika</groupId>
             <artifactId>orika-core</artifactId>
             <version>1.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.springboot.microservice</groupId>
+            <artifactId>currencyconversiondto</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

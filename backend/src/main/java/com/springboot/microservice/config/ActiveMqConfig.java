@@ -41,8 +41,12 @@ public class ActiveMqConfig {
     @Value("${message.broker.tjm}")
     private String tjmQueue;
 
+    private  ConnectionFactory connectionFactory;
+
     @Autowired
-    private ConnectionFactory connectionFactory;
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Bean
     public ConnectionFactory connectionFactory() {

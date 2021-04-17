@@ -10,20 +10,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
-@Async
 @Data
 @Service
 @Slf4j
 public class RestTemplateService {
 
-    public ResponseEntity<CurrencyConversionDto> getCurrencyConversion(CurrencyConversionDto currencyConversionDto) {
+    public CurrencyConversionDto getCurrencyConversion(CurrencyConversionDto currencyConversionDto) {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<CurrencyConversionDto> requestBody = new HttpEntity<>(currencyConversionDto);
-        ResponseEntity<CurrencyConversionDto> result
-                = restTemplate.postForEntity("http://localhost:8000/exchangevalue/retrieve", requestBody, CurrencyConversionDto.class);
+        CurrencyConversionDto result
+                = restTemplate.postForEntity("http://localhost:8000/exchangevalue/retrieve", requestBody, CurrencyConversionDto.class).getBody();
+
+
         return result;
     }
+
     @Async
     public void beginAsyncCurrencyConversion(CurrencyConversionDto currencyConversionDto) {
         log.info("Начали .....");
