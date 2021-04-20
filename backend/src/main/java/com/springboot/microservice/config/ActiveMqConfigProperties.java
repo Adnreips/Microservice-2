@@ -18,5 +18,4 @@ public class ActiveMqConfigProperties {
 
     private String tjmQueue;
 
-
 }

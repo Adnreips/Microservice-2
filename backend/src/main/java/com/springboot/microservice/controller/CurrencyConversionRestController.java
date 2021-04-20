@@ -58,7 +58,7 @@ public class CurrencyConversionRestController {
     @PostMapping(value = "/retrieveasyncresponse", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public CurrencyConversionDto getExchangeValueAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
-        log.info("Exchange value: {}", currencyConversionDto);
+        log.info("Exchange value: {}", currencyConversionDto.getConversionMultiple());
         return currencyConversionDto;
 
     }

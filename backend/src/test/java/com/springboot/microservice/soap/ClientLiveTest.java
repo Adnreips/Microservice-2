@@ -33,7 +33,7 @@ class ClientLiveTest {
         currencyConversionDto.setTo("INR");
         currencyConversionDto.setConversionMultiple(new BigDecimal("1"));
         currencyConversionDto.setQuantity(new BigDecimal("1"));
-        currencyConversionDto.setMultiply(new BigDecimal("65"));
+        currencyConversionDto.setMultiply(new BigDecimal("0"));
         currencyConversionDto.setPort(1);
     }
 

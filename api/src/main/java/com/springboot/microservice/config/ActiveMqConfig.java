@@ -26,8 +26,6 @@ import java.util.Arrays;
 @Configuration
 @EnableJms
 @Slf4j
-@EnableConfigurationProperties(ActiveMqConfigProperties.class)
-@PropertySource(value = {"classpath:application.properties"})
 @Data
 @NoArgsConstructor
 public class ActiveMqConfig {
@@ -41,15 +39,12 @@ public class ActiveMqConfig {
     @Value("${mb.activemq.password}")
     private String password;
 
-    @Value("${message.broker.tjm}")
-    private String tjmQueue;
-
-    @Autowired
     private ConnectionFactory connectionFactory;
 
     @Autowired
-    private ActiveMqConfigProperties activeMqConfigProperties;
-
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Bean
     public ConnectionFactory connectionFactory() {

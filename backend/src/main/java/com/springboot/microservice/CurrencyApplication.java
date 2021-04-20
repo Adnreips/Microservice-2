@@ -43,8 +43,4 @@ public class CurrencyApplication {
                 .build();
     }
 
-//    @Bean
-//    public AuditorAware<String> auditorAware(){
-//        return new EntityAuditing();
-//    }
 }
