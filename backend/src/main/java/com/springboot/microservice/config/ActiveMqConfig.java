@@ -1,10 +1,13 @@
 package com.springboot.microservice.config;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -20,14 +23,14 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Session;
 import java.util.Arrays;
 
-
-
 @Configuration
 @EnableJms
+@Slf4j
+@EnableConfigurationProperties(ActiveMqConfigProperties.class)
 @PropertySource(value = {"classpath:application.properties"})
+@Data
+@NoArgsConstructor
 public class ActiveMqConfig {
-
-    private static final Logger logger = LogManager.getLogger(ActiveMqConfig.class.getName());
 
     @Value("${mb.activemq.url}")
     private String brokerUrl;
@@ -41,16 +44,16 @@ public class ActiveMqConfig {
     @Value("${message.broker.tjm}")
     private String tjmQueue;
 
-    private  ConnectionFactory connectionFactory;
+    @Autowired
+    private ConnectionFactory connectionFactory;
 
     @Autowired
-    public void setConnectionFactory(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
-    }
+    private ActiveMqConfigProperties activeMqConfigProperties;
+
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        logger.info("init ConnectionFactory");
+        log.info("init ConnectionFactory");
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
         connectionFactory.setBrokerURL(brokerUrl);
         connectionFactory.setUserName(userName);
@@ -61,10 +64,9 @@ public class ActiveMqConfig {
 
     @Bean
     public MessageConverter jacksonJmsMessageConverter() {
-        logger.info("init MessageConverter");
+        log.info("init MessageConverter");
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
-//        converter.setTargetType(MessageType.OBJECT);
         converter.setTypeIdPropertyName("_type");
         return converter;
     }

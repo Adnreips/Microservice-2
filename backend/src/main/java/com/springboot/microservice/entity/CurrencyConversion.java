@@ -1,26 +1,22 @@
-package com.springboot.microservice.model;
+package com.springboot.microservice.entity;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.UUID;
 
 @Data
-@Service
-@NoArgsConstructor
 @Document
 public class CurrencyConversion {
 
-    @Id()
-    private String id;
+    private Long ido;
+    @Id
+    private UUID uuid = UUID.randomUUID();
     @NotBlank(message = "from is mandatory")
     private String from;
     @NotBlank(message = "to is mandatory")
@@ -29,8 +25,11 @@ public class CurrencyConversion {
     private BigDecimal quantity;
     private BigDecimal multiply;
     private int port;
-    private LocalDateTime timeStamp;
-
-
+    @CreatedDate
+    private Date timestamp;
+    @CreatedBy
+    private String createdBy;
+    @Version
+    private Integer version;
 
 }

@@ -20,8 +20,11 @@ public class Sender {
 
     public void sendMessageObject(final String queueName, final Object message) {
         log.info("Sending message {} to queue - {}", message, queueName);
+
+
         jmsTemplate.setTimeToLive(30000);
         jmsTemplate.convertAndSend(queueName, message);
+
     }
 }
 
