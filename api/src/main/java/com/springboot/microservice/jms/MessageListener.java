@@ -2,6 +2,7 @@ package com.springboot.microservice.jms;
 
 import com.springboot.microservice.CurrencyConversionDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
