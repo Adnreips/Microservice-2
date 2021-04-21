@@ -26,8 +26,6 @@ public class CurrencyConversionRestController {
 
     private final CurrencyConversionService currencyConversionService;
 
-
-
     @Autowired
     public CurrencyConversionRestController(RestTemplateService restTemplateService, CurrencyConversionRepository currencyConversionRepository, CurrencyConversionService currencyConversionService, CurrencyConversionFromDto currencyConversionFromDto) {
         this.restTemplateService = restTemplateService;
@@ -38,7 +36,9 @@ public class CurrencyConversionRestController {
     @PostMapping(value = "/rest", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<CurrencyConversionDto> convertCurrency(@RequestBody CurrencyConversionDto currencyConversionDto) {
+
             CurrencyConversionDto currencyConversionDtoConverted = restTemplateService.getCurrencyConversion(currencyConversionDto);
+
             currencyConversionService.saveToDataBase(currencyConversionDtoConverted);
 
         return ResponseEntity.ok().body(currencyConversionDtoConverted);

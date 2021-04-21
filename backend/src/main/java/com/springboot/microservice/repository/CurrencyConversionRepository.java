@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CurrencyConversionRepository extends MongoRepository<CurrencyConversion, Long> {
+
+
     @Override
-    <S extends CurrencyConversion> S insert(S s);
+    <S extends CurrencyConversion> S insert(S entity);
 
     public Optional<CurrencyConversion> findById(Long Id);
 

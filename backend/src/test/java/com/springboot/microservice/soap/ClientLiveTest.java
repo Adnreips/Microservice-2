@@ -29,8 +29,8 @@ class ClientLiveTest {
     public void setUp() {
         currencyConversionDto = new CurrencyConversionDto();
         currencyConversionDto.setId(1L);
-        currencyConversionDto.setFrom("USD");
-        currencyConversionDto.setTo("INR");
+        currencyConversionDto.setFrom("EUR");
+        currencyConversionDto.setTo("RUB");
         currencyConversionDto.setConversionMultiple(new BigDecimal("1"));
         currencyConversionDto.setQuantity(new BigDecimal("1"));
         currencyConversionDto.setMultiply(new BigDecimal("0"));
@@ -40,7 +40,7 @@ class ClientLiveTest {
     @Test
     void givenCurrencyConversionDto() {
         GetCurrencyConversionDtoResponse response = currencyConversionDtoClient.getCurrencyConversionDto(currencyConversionDto);
-        assertEquals(new BigDecimal("65.00"), response.getCurrencyConversionDto().getConversionMultiple());
+        assertEquals(new BigDecimal("85.00"), response.getCurrencyConversionDto().getConversionMultiple());
 
     }
 }

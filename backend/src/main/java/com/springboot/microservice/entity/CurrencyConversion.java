@@ -14,7 +14,7 @@ import java.util.UUID;
 @Document
 public class CurrencyConversion {
 
-    private Long ido;
+    private Long id;
     @Id
     private UUID uuid = UUID.randomUUID();
     @NotBlank(message = "from is mandatory")

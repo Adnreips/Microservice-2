@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 public class CurrencyConversionFromDto {
 
     public CurrencyConversion from(CurrencyConversionDto currencyConversionDto){
+
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         mapperFactory.classMap(CurrencyConversionDto.class, CurrencyConversion.class);
         MapperFacade mapper = mapperFactory.getMapperFacade();
         CurrencyConversion currencyConversion;
         currencyConversion = mapper.map(currencyConversionDto, CurrencyConversion.class);
         return currencyConversion;
-
     }
 
 }
