@@ -13,15 +13,11 @@ import org.springframework.stereotype.Component;
 public class Sender {
 
     private JmsTemplate jmsTemplate;
-
     public Sender(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
     }
-
     public void sendMessageObject(final String queueName, final Object message) {
         log.info("Sending message {} to queue - {}", message, queueName);
-
-
         jmsTemplate.setTimeToLive(30000);
         jmsTemplate.convertAndSend(queueName, message);
 

@@ -32,13 +32,10 @@ public class ActiveMqConfig {
 
     @Value("${mb.activemq.url}")
     private String brokerUrl;
-
     @Value("${mb.activemq.username}")
     private String userName;
-
     @Value("${mb.activemq.password}")
     private String password;
-
     private ConnectionFactory connectionFactory;
 
     @Autowired

@@ -23,7 +23,6 @@ import java.util.Random;
 public class CurrencyConversionRestController {
 
     private final RestTemplateService restTemplateService;
-
     private final CurrencyConversionService currencyConversionService;
 
     @Autowired
@@ -36,11 +35,8 @@ public class CurrencyConversionRestController {
     @PostMapping(value = "/rest", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<CurrencyConversionDto> convertCurrency(@RequestBody CurrencyConversionDto currencyConversionDto) {
-
             CurrencyConversionDto currencyConversionDtoConverted = restTemplateService.getCurrencyConversion(currencyConversionDto);
-
             currencyConversionService.saveToDataBase(currencyConversionDtoConverted);
-
         return ResponseEntity.ok().body(currencyConversionDtoConverted);
     }
 
@@ -60,7 +56,6 @@ public class CurrencyConversionRestController {
     public CurrencyConversionDto getExchangeValueAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
         log.info("Exchange value: {}", currencyConversionDto.getConversionMultiple());
         return currencyConversionDto;
-
     }
 
 

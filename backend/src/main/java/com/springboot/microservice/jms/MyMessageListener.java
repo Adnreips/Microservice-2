@@ -11,7 +11,6 @@ public class MyMessageListener extends MessageListener{
     @Override
     public void receiveMessage2(CurrencyConversionDto message) {
         super.receiveMessage2(message);
-        log.info("Received message, conversionMultiple = {}", message.getConversionMultiple());
-
+        log.info("Received message, conversionMultiple = {}", message);
     }
 }

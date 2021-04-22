@@ -18,7 +18,6 @@ public class CurrencyConversionDtoClient extends WebServiceGatewaySupport{
 
 
     public GetCurrencyConversionDtoResponse getCurrencyConversionDto(CurrencyConversionDto currencyConversionDto) {
-
         GetCurrencyConversionDtoRequest request = new GetCurrencyConversionDtoRequest();
         request.setCurrencyConversionDto(currencyConversionDto);
         GetCurrencyConversionDtoResponse response = (GetCurrencyConversionDtoResponse) getWebServiceTemplate()

@@ -11,11 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class ActiveMqConfigProperties {
 
     private String brokerUrl;
-
     private String userName;
-
     private String password;
-
     private String tjmQueue;
-
 }
