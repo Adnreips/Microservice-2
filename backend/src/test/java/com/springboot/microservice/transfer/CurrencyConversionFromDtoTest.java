@@ -11,9 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CurrencyConversionFromDtoTest {
 
-    CurrencyConversionFromDto currencyConversionFromDto;
-    CurrencyConversionDto actualCurrencyConversionDto;
-
+    private CurrencyConversionFromDto currencyConversionFromDto;
+    private CurrencyConversionDto actualCurrencyConversionDto;
 
     @BeforeEach
     public void setUp() {
@@ -27,7 +26,6 @@ class CurrencyConversionFromDtoTest {
         actualCurrencyConversionDto.setMultiply(new BigDecimal("65"));
         actualCurrencyConversionDto.setPort(1);
     }
-
 
     @Test
     void fromTest() {

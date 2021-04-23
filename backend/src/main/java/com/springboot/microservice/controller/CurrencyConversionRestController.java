@@ -35,27 +35,28 @@ public class CurrencyConversionRestController {
     @PostMapping(value = "/rest", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<CurrencyConversionDto> convertCurrency(@RequestBody CurrencyConversionDto currencyConversionDto) {
-            CurrencyConversionDto currencyConversionDtoConverted = restTemplateService.getCurrencyConversion(currencyConversionDto);
-            currencyConversionService.saveToDataBase(currencyConversionDtoConverted);
-        return ResponseEntity.ok().body(currencyConversionDtoConverted);
+            CurrencyConversionDto currencyConversionDtoResult = restTemplateService.getCurrencyConversion(currencyConversionDto);
+            currencyConversionService.saveToDataBase(currencyConversionDtoResult);
+        return ResponseEntity.ok().body(currencyConversionDtoResult);
     }
 
     @ApiOperation("Send request async")
     @PostMapping(value = "/restasync", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public CurrencyConversionDto convertCurrencyAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
+    public ResponseEntity<CurrencyConversionDto> convertCurrencyAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
         currencyConversionDto.setId(new Random().nextLong());
         restTemplateService.beginAsyncCurrencyConversion(currencyConversionDto);
-        return currencyConversionDto;
+        return ResponseEntity.ok().body(currencyConversionDto);
 
     }
 
     @ApiOperation("Get response async")
     @PostMapping(value = "/retrieveasyncresponse", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public CurrencyConversionDto getExchangeValueAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
+    public ResponseEntity<CurrencyConversionDto> getExchangeValueAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
         log.info("Exchange value: {}", currencyConversionDto.getConversionMultiple());
-        return currencyConversionDto;
+        currencyConversionService.saveToDataBase(currencyConversionDto);
+        return ResponseEntity.ok().body(currencyConversionDto);
     }
 
 
