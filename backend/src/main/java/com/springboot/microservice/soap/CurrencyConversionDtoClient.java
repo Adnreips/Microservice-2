@@ -26,4 +26,7 @@ public class CurrencyConversionDtoClient extends WebServiceGatewaySupport{
                                 "http://springboot.com/microservice/GetCurrencyConversionDtoRequest"));
         return response;
     }
+
+
+
 }

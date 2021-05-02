@@ -48,7 +48,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -56,18 +55,8 @@
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
-
-
-
     </dependencies>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <url>http://repo1.maven.org/maven2</url>
-        </pluginRepository>
-    </pluginRepositories>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -79,6 +68,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <repositories>
         <repository>
             <id>spring-milestones</id>
@@ -86,5 +76,13 @@
             <url>https://repo.spring.io/milestone/</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <url>https://repo1.maven.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

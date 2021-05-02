@@ -1,16 +1,10 @@
 package com.springboot.microservice.config;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.JmsTransactionManager;
@@ -21,27 +15,21 @@ import org.springframework.jms.support.converter.MessageType;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Session;
-import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableJms
 @Slf4j
-@Data
-@NoArgsConstructor
 public class ActiveMqConfig {
 
     @Value("${mb.activemq.url}")
     private String brokerUrl;
+
     @Value("${mb.activemq.username}")
     private String userName;
+
     @Value("${mb.activemq.password}")
     private String password;
-    private ConnectionFactory connectionFactory;
-
-    @Autowired
-    public void setConnectionFactory(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
-    }
 
     @Bean
     public ConnectionFactory connectionFactory() {
@@ -50,7 +38,7 @@ public class ActiveMqConfig {
         connectionFactory.setBrokerURL(brokerUrl);
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
-        connectionFactory.setTrustedPackages(Arrays.asList("com.springboot"));
+        connectionFactory.setTrustedPackages(Collections.singletonList("com.springboot"));
         return connectionFactory;
     }
 
@@ -64,7 +52,7 @@ public class ActiveMqConfig {
     }
 
     @Bean
-    public DefaultJmsListenerContainerFactory jmsFactory() {
+    public DefaultJmsListenerContainerFactory jmsFactory(ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(jacksonJmsMessageConverter());
