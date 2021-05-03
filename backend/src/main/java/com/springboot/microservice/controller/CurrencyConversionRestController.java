@@ -33,33 +33,27 @@ public class CurrencyConversionRestController {
     }
 
     @ApiOperation("Send request sync")
-    @PostMapping(value = "/rest", consumes = "application/json", produces = "application/json")
-    @ResponseBody
+    @PostMapping(value = "/rest")
     public ResponseEntity<CurrencyConversionDto> convertCurrency(@RequestBody CurrencyConversionDto currencyConversionDto) {
         CurrencyConversionDto currencyConversionDtoResult = restTemplateService.getCurrencyConversion(currencyConversionDto);
         currencyConversionService.saveToDataBase(currencyConversionDtoResult);
         return ResponseEntity.ok().body(currencyConversionDtoResult);
     }
 
-    //todo consumes = "application/json", produces = "application/json"
-    //todo @ResponseBody
-    //todo @RequestBody
+
     @ApiOperation("Send request async")
-    @PostMapping(value = "/restasync", consumes = "application/json", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<CurrencyConversionDto> convertCurrencyAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
+    @PostMapping(value = "/restasync")
+    public ResponseEntity<String> convertCurrencyAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
         currencyConversionDto.setId(random.nextLong());
-        restTemplateService.getCurrencyConversionAsync(currencyConversionDto);
-        return ResponseEntity.ok().body(currencyConversionDto);
+        return restTemplateService.getCurrencyConversionAsync(currencyConversionDto);
     }
 
     @ApiOperation("Get response async")
-    @PostMapping(value = "/retrieveasyncresponse", consumes = "application/json", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<CurrencyConversionDto> getExchangeValueAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
-        log.info("Exchange value: {}", currencyConversionDto.getConversionMultiple());
+    @PostMapping(value = "/retrieveasyncresponse")
+    public ResponseEntity<String> getExchangeValueAsync(@RequestBody CurrencyConversionDto currencyConversionDto) {
+        log.info("Получен post-запрос c CurrencyConversionDto: {}", currencyConversionDto.getConversionMultiple());
         currencyConversionService.saveToDataBase(currencyConversionDto);
-        return ResponseEntity.ok().body(currencyConversionDto);
+        return ResponseEntity.ok().body("Ok");
     }
 
 }

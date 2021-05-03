@@ -1,8 +1,9 @@
 package com.springboot.microservice.config;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
@@ -18,18 +19,16 @@ import javax.jms.Session;
 import java.util.Collections;
 
 @Configuration
+@ConfigurationProperties(prefix = "broker")
+@Data
 @EnableJms
 @Slf4j
 public class ActiveMqConfig {
 
-    @Value("${mb.activemq.url}")
     private String brokerUrl;
-
-    @Value("${mb.activemq.username}")
     private String userName;
-
-    @Value("${mb.activemq.password}")
     private String password;
+    private String tjmQueue;
 
     @Bean
     public ConnectionFactory connectionFactory() {
@@ -76,5 +75,4 @@ public class ActiveMqConfig {
         template.setConnectionFactory(connectionFactory());
         return template;
     }
-
 }

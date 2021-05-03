@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,24 +21,28 @@ public class RestTemplateService {
     }
 
     public CurrencyConversionDto getCurrencyConversion(CurrencyConversionDto currencyConversionDto) {
-        log.debug("Начали c DTO: {}", currencyConversionDto);
+        log.info("Отправка запроса к forex с DTO : {}", currencyConversionDto);
 
         HttpEntity<CurrencyConversionDto> requestBody = new HttpEntity<>(currencyConversionDto);
-        CurrencyConversionDto result
-                = restTemplate.postForEntity("http://localhost:8000/exchangevalue/retrieve", requestBody, CurrencyConversionDto.class).getBody();
+        CurrencyConversionDto result = restTemplate.postForEntity(
+                "http://localhost:8000/exchangevalue/retrieve",
+                requestBody,
+                CurrencyConversionDto.class).getBody();
 
-        log.debug("Закончили c ответом: {}", result);
+        log.info("Получен ответ от forex с DTO: {}", result);
         return result;
     }
 
-    @Async
-    public void getCurrencyConversionAsync(CurrencyConversionDto currencyConversionDto) {
-        log.debug("Начали c DTO: {}", currencyConversionDto);
+    public ResponseEntity<String> getCurrencyConversionAsync(CurrencyConversionDto currencyConversionDto) {
+        log.info("Отправка запроса к forex с DTO: {}", currencyConversionDto);
 
         HttpEntity<CurrencyConversionDto> requestBody = new HttpEntity<>(currencyConversionDto);
-        ResponseEntity<CurrencyConversionDto> result
-                = restTemplate.postForEntity("http://localhost:8000/exchangevalue/retrieveasyncrequest", requestBody, CurrencyConversionDto.class);
+        ResponseEntity<String> result = restTemplate.postForEntity(
+                "http://localhost:8000/exchangevalue/retrieveasyncrequest",
+                requestBody,
+                String.class);
 
-        log.debug("Закончили c ответом: {}", result);
+        log.info("Получен ответ от forex с DTO: {}", result);
+        return result;
     }
 }

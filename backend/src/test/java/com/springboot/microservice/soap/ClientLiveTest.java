@@ -1,7 +1,6 @@
 package com.springboot.microservice.soap;
 
 
-
 import com.springboot.microservice.CurrencyConversionDto;
 import com.springboot.microservice.GetCurrencyConversionDtoResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class ClientLiveTest {
 
-    private  CurrencyConversionDtoClient currencyConversionDtoClient;
+    private final CurrencyConversionDtoClient currencyConversionDtoClient;
 
     private CurrencyConversionDto currencyConversionDto;
 
@@ -39,8 +38,9 @@ class ClientLiveTest {
 
     @Test
     void givenCurrencyConversionDto() {
-        GetCurrencyConversionDtoResponse response = currencyConversionDtoClient.getCurrencyConversionDto(currencyConversionDto);
-        assertEquals(new BigDecimal("85.00"), response.getCurrencyConversionDto().getConversionMultiple());
+        GetCurrencyConversionDtoResponse actualResponse = currencyConversionDtoClient.getCurrencyConversionDto(currencyConversionDto);
 
+        BigDecimal expectedConversionMultiple = new BigDecimal("85.00");
+        assertEquals(expectedConversionMultiple, actualResponse.getCurrencyConversionDto().getConversionMultiple());
     }
 }

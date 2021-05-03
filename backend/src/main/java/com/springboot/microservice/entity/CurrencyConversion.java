@@ -2,16 +2,20 @@ package com.springboot.microservice.entity;
 
 
 import lombok.Data;
-import org.springframework.data.annotation.*;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
 @Data
 @Document
+@EqualsAndHashCode(exclude = {"uuid"})
 public class CurrencyConversion {
 
     private Long id;
@@ -19,12 +23,8 @@ public class CurrencyConversion {
     @Id
     private UUID uuid = UUID.randomUUID();
 
-    @NotBlank(message = "from is mandatory")
     private String from;
-
-    @NotBlank(message = "to is mandatory")
     private String to;
-
     private BigDecimal conversionMultiple;
     private BigDecimal quantity;
     private BigDecimal multiply;
@@ -38,5 +38,4 @@ public class CurrencyConversion {
 
     @Version
     private Integer version;
-
 }

@@ -4,7 +4,6 @@ import com.springboot.microservice.CurrencyConversionDto;
 import com.springboot.microservice.config.MapperConfig;
 import com.springboot.microservice.entity.CurrencyConversion;
 import ma.glasnost.orika.MapperFacade;
-import ma.glasnost.orika.MapperFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,33 +13,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CurrencyMapperFromDtoTest {
 
-    private CurrencyMapperFromDto currencyConversionFromDto;
-    private CurrencyConversionDto actualCurrencyConversionDto;
-    private MapperFacade mapperFacade;
-    private MapperConfig mapperConfig;
-    private MapperFactory mapperFactory;
+    private CurrencyMapperFromDto currencyMapperFromDto;
+    private CurrencyConversionDto currencyConversionDto;
+    private CurrencyConversion expectedCurrencyConversion;
 
     @BeforeEach
     public void setUp() {
-        mapperConfig = new MapperConfig();
-        mapperFacade = mapperConfig.mapperFacade(mapperConfig.mapperFactory());
-        currencyConversionFromDto = new CurrencyMapperFromDto(mapperFacade);
-        actualCurrencyConversionDto = new CurrencyConversionDto();
-        actualCurrencyConversionDto.setId(1L);
-        actualCurrencyConversionDto.setFrom("USD");
-        actualCurrencyConversionDto.setTo("INR");
-        actualCurrencyConversionDto.setConversionMultiple(new BigDecimal("1"));
-        actualCurrencyConversionDto.setQuantity(new BigDecimal("1"));
-        actualCurrencyConversionDto.setMultiply(new BigDecimal("65"));
-        actualCurrencyConversionDto.setPort(1);
+        MapperConfig mapperConfig = new MapperConfig();
+        MapperFacade mapperFacade = mapperConfig.mapperFacade(mapperConfig.mapperFactory());
+
+        currencyMapperFromDto = new CurrencyMapperFromDto(mapperFacade);
+
+        currencyConversionDto = new CurrencyConversionDto();
+        currencyConversionDto.setId(1L);
+        currencyConversionDto.setFrom("USD");
+        currencyConversionDto.setTo("INR");
+        currencyConversionDto.setConversionMultiple(new BigDecimal("1"));
+        currencyConversionDto.setQuantity(new BigDecimal("1"));
+        currencyConversionDto.setMultiply(new BigDecimal("65"));
+        currencyConversionDto.setPort(1);
+
+        expectedCurrencyConversion = new CurrencyConversion();
+        expectedCurrencyConversion.setId(1L);
+        expectedCurrencyConversion.setFrom("USD");
+        expectedCurrencyConversion.setTo("INR");
+        expectedCurrencyConversion.setConversionMultiple(new BigDecimal("1"));
+        expectedCurrencyConversion.setQuantity(new BigDecimal("1"));
+        expectedCurrencyConversion.setMultiply(new BigDecimal("65"));
+        expectedCurrencyConversion.setPort(1);
     }
 
     @Test
     void fromTest() {
-        CurrencyConversion expectedCurrencyConversion;
-        expectedCurrencyConversion = currencyConversionFromDto.from(actualCurrencyConversionDto);
-
-        assertEquals(actualCurrencyConversionDto.getConversionMultiple(), expectedCurrencyConversion.getConversionMultiple());
-        assertEquals(actualCurrencyConversionDto.getFrom(), expectedCurrencyConversion.getFrom());
+        CurrencyConversion actualCurrencyConversion = currencyMapperFromDto.from(currencyConversionDto);
+        assertEquals(expectedCurrencyConversion, actualCurrencyConversion);
     }
 }
