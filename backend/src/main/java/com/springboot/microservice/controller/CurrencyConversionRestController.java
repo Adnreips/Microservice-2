@@ -3,7 +3,7 @@ package com.springboot.microservice.controller;
 
 import com.springboot.microservice.CurrencyConversionDto;
 import com.springboot.microservice.repository.CurrencyConversionRepository;
-import com.springboot.microservice.rest.service.RestTemplateService;
+import com.springboot.microservice.service.RestTemplateService;
 import com.springboot.microservice.service.CurrencyConversionService;
 import com.springboot.microservice.mappers.CurrencyMapperFromDto;
 import io.swagger.annotations.Api;

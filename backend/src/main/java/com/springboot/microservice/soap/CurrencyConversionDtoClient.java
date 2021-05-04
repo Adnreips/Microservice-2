@@ -12,7 +12,6 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 @Slf4j
 public class CurrencyConversionDtoClient extends WebServiceGatewaySupport {
 
-
     public GetCurrencyConversionDtoResponse getCurrencyConversionDto(CurrencyConversionDto currencyConversionDto) {
         GetCurrencyConversionDtoRequest request = new GetCurrencyConversionDtoRequest();
         request.setCurrencyConversionDto(currencyConversionDto);

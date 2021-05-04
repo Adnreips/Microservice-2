@@ -1,4 +1,4 @@
-package com.springboot.microservice.rest.service;
+package com.springboot.microservice.service;
 
 import com.springboot.microservice.CurrencyConversionDto;
 import lombok.extern.slf4j.Slf4j;
